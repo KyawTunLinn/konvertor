@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KConvertor API Documentation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        .api-section {
+            background: var(--surface-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .method {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-right: 1rem;
+        }
+
+        .method.post {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .method.get {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            color: var(--accent-color);
+        }
+
+        pre {
+            background: #1e1e1e;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>API Documentation</h1>
+            <p class="subtitle">Integrate KConvertor into your applications</p>
+        </header>
+
+        <a href="/" class="back-link">← Back to Converter</a>
+
+        <div class="api-section">
+            <h2><span class="method post">POST</span> /api/convert</h2>
+            <p>Upload and convert a video file to audio.</p>
+
+            <h3>Parameters (Multipart/Form-Data)</h3>
+            <ul>
+                <li><code>file</code>: The video file to convert (required).</li>
+                <li><code>format</code>: Target audio format. Options: <code>mp3</code>, <code>aac</code>,
+                    <code>wav</code>, <code>ogg</code>, <code>flac</code>, <code>opus</code>, <code>m4a</code>. Default:
+                    <code>mp3</code>.
+                </li>
+                <li><code>quality</code>: Encoding quality. Options: <code>high</code>, <code>medium</code>,
+                    <code>low</code>, <code>podcast</code>. Default: <code>medium</code>.
+                </li>
+            </ul>
+
+            <h3>Example Request</h3>
+            <pre><code>curl -X POST http://localhost:8080/api/convert \
+  -F "file=@video.mp4" \
+  -F "format=mp3" \
+  -F "quality=high"</code></pre>
+
+            <h3>Success Response</h3>
+            <pre><code>{
+  "status": "success",
+  "download_url": "/downloads/konverter_UUID_video.mp3"
+}</code></pre>
+        </div>
+
+        <div class="api-section">
+            <h2><span class="method post">POST</span> /api/zip</h2>
+            <p>Bundle multiple converted files into a ZIP archive.</p>
+
+            <h3>Parameters (JSON)</h3>
+            <ul>
+                <li><code>files</code>: Array of filenames (strings) previously returned by the convert endpoint. Files
+                    must exist in the server's download directory.</li>
+            </ul>
+
+            <h3>Example Request</h3>
+            <pre><code>curl -X POST http://localhost:8080/api/zip \
+  -H "Content-Type: application/json" \
+  -d '{"files": ["konverter_123_a.mp3", "konverter_456_b.mp3"]}'</code></pre>
+
+            <h3>Success Response</h3>
+            <pre><code>{
+  "status": "success",
+  "download_url": "/downloads/batch_UUID.zip"
+}</code></pre>
+        </div>
+
+        <div class="api-section">
+            <h2><span class="method get">GET</span> /api/stats</h2>
+            <p>Get global server statistics.</p>
+
+            <h3>Example Request</h3>
+            <pre><code>curl http://localhost:8080/api/stats</code></pre>
+
+            <h3>Success Response</h3>
+            <pre><code>{
+  "total_conversions": 42
+}</code></pre>
+        </div>
+
+        <footer>
+            <p>Powered by Drogon C++ & FFmpeg | <a href="https://github.com/KyawTunLinn/konvertor" target="_blank"
+                    style="color: var(--text-secondary); text-decoration: none;">Source Code</a></p>
+            <p>&copy; 2026 Kyaw Tun Linn | Version v0.1.0 | Licensed under GPL-2.0</p>
+        </footer>
+    </div>
+</body>
+
+</html>

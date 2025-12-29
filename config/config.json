@@ -1,0 +1,26 @@
+{
+    "listeners": [
+        {
+            "address": "0.0.0.0",
+            "port": 8080,
+            "https": false
+        }
+    ],
+    "app": {
+        "number_of_threads": 4,
+        "enable_server_header": false,
+        "server_header_field": "",
+        "log_level": "INFO",
+        "use_gzip": true,
+        "use_brotli": true,
+        "client_max_body_size": "500M",
+        "upload_path": "./uploads"
+    },
+    "static_server": {
+        "root_path": "./www",
+        "index_page": "index.html",
+        "error_404_page": "404.html",
+        "cache_control": "public, max-age=3600",
+        "description": "Configuration for Static File Server. root_path: Folder to serve. index_page: Default file for directories. error_404_page: Custom 404 file relative to root. cache_control: HTTP Header value."
+    }
+}

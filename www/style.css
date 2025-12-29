@@ -1,0 +1,532 @@
+/* Modern Design System - KConvertor */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Color Palette */
+    --primary-bg: #0f172a;
+    --secondary-bg: #1e293b;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --accent-color: #3b82f6;
+    /* Blue-500 */
+    --accent-hover: #2563eb;
+    /* Blue-600 */
+    --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    --success-color: #10b981;
+    /* Emerald-500 */
+    --error-color: #ef4444;
+    /* Red-500 */
+    --border-color: rgba(255, 255, 255, 0.1);
+
+    /* Spacing & Layout */
+    --container-max-width: 1200px;
+    --header-height: 80px;
+    --border-radius-lg: 24px;
+    --border-radius-md: 16px;
+    --border-radius-sm: 8px;
+
+    /* Effects */
+    --glass-blur: blur(12px);
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 40%);
+    overflow-x: hidden;
+}
+
+/* Typography */
+h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, #ffffff, #94a3b8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* Layout */
+.container {
+    width: 100%;
+    max-width: var(--container-max-width);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+/* Stats Badge */
+#statsDisplay {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    color: var(--accent-color);
+    margin-top: 1.5rem;
+    backdrop-filter: blur(5px);
+}
+
+/* Main Card */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: var(--glass-blur);
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+/* Upload Area */
+.upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 3rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.02);
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-area:hover,
+.upload-area.drag-over {
+    border-color: var(--accent-color);
+    background: rgba(59, 130, 246, 0.05);
+    box-shadow: var(--shadow-glow);
+}
+
+.upload-icon {
+    width: 64px;
+    height: 64px;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.upload-area:hover .upload-icon {
+    transform: scale(1.1);
+    color: var(--accent-color);
+}
+
+.upload-area p {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.file-info {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+/* Controls */
+.controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+select {
+    width: 100%;
+    background: var(--secondary-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: var(--border-radius-md);
+    font-size: 1rem;
+    appearance: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.25rem;
+}
+
+select:hover,
+select:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
+
+/* Primary Button */
+.convert-btn {
+    grid-column: 1 / -1;
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    padding: 1.25rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-glow);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 1rem;
+}
+
+.convert-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
+}
+
+.convert-btn:disabled {
+    background: var(--secondary-bg);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+/* Batch List */
+.batch-file-list {
+    margin: 1.5rem 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: var(--border-radius-md);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+}
+
+.batch-file-item {
+    background: var(--secondary-bg);
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: transform 0.2s ease;
+}
+
+.batch-file-item:hover {
+    transform: translateX(4px);
+    border-color: var(--accent-color);
+}
+
+.batch-file-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.file-name {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60%;
+}
+
+.file-status {
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* Progress & Download */
+.progress-container {
+    margin-top: 1.5rem;
+    background: var(--secondary-bg);
+    border-radius: var(--border-radius-md);
+    padding: 1.5rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.progress-bar-bg {
+    background: rgba(255, 255, 255, 0.1);
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.progress-bar-fill {
+    background: var(--accent-gradient);
+    height: 100%;
+    width: 0%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.batch-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--success-color);
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.batch-download-btn:hover {
+    background: var(--success-color);
+    color: white;
+}
+
+/* New Result Area */
+.result {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.download-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--success-color);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    transition: all 0.3s ease;
+}
+
+.download-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+#resetBtn.convert-btn {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+    box-shadow: none;
+    margin-top: 1rem;
+    font-size: 1rem;
+    padding: 1rem;
+}
+
+.batch-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--success-color);
+    padding: 6px 16px;
+    border: 1px solid var(--success-color);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.batch-download-btn:hover {
+    background: var(--success-color);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 10px rgba(16, 185, 129, 0.2);
+}
+
+.batch-download-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2.5;
+}
+
+#resetBtn.convert-btn:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+/* Modal */
+/* Custom Modal Styles */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: 3rem 2rem;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(16, 185, 129, 0.2);
+    position: relative;
+    animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-icon {
+    margin-bottom: 1.5rem;
+    animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+}
+
+.modal-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.75rem;
+    animation: fadeUp 0.5s ease 0.3s backwards;
+}
+
+.modal-message {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.5s ease 0.4s backwards;
+}
+
+.modal-button {
+    background: var(--success-color);
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    animation: fadeUp 0.5s ease 0.5s backwards;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.modal-button:hover {
+    background: #059669;
+    /* Emerald-600 */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.modal-button:active {
+    transform: translateY(0);
+}
+
+/* Footer */
+footer {
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+    width: 100%;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .card {
+        padding: 1.5rem;
+        margin: 0 1rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .upload-area {
+        padding: 2rem 1rem;
+    }
+
+    .controls {
+        grid-template-columns: 1fr;
+    }
+
+    .batch-file-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .file-status {
+        align-self: flex-end;
+    }
+}

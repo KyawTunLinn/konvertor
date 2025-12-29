@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Konvertor</title>
+    <link rel="stylesheet" href="style.css?v=timestamp">
+    <style>
+        /* Additional 404-specific styles */
+        .error-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .error-content {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .error-code {
+            font-size: 120px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+            animation: fadeUp 0.6s ease-out;
+        }
+
+        .error-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            animation: fadeUp 0.8s ease-out 0.1s backwards;
+        }
+
+        .error-message {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.5;
+            animation: fadeUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 0.8s ease-out 0.3s backwards;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.25);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-color);
+            padding: 14px 32px;
+            border-radius: 980px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+            display: inline-block;
+            border: 2px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-color);
+            background: rgba(0, 102, 204, 0.05);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Icon styling */
+        .error-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            opacity: 0.3;
+            animation: fadeUp 0.6s ease-out;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-container">
+        <div class="error-content">
+            <!-- Optional icon -->
+            <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+
+            <div class="error-code">404</div>
+            <h1 class="error-title">Page Not Found</h1>
+            <p class="error-message">
+                We couldn't find the page you're looking for. It might have been moved or doesn't exist.
+            </p>
+
+            <div class="error-actions">
+                <a href="/" class="btn-primary">Go to Home</a>
+                <a href="javascript:history.back()" class="btn-secondary">Go Back</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

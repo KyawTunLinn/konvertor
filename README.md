@@ -1,4 +1,5 @@
-# <img src="www/logo.png" width="64" height="64" alt="KConvertor Logo" style="vertical-align: middle;"> Drogon Static Web Server (v0.1.0)
+# <img src="www/logo.png" width="64" height="64" alt="Konvertor Logo" style="vertical-align: middle;"> 
+# Konvertor (v0.1.0)
 
 A high-performance C++ Video-to-Audio Converter and static web server built using the [Drogon](https://github.com/drogonframework/drogon) framework. This project allows users to upload video files and convert them to various audio formats (MP3, AAC, OGG, etc.) with custom quality settings. It also features a "Download All" (ZIP) capability for batch conversions.
 

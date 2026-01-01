@@ -3,10 +3,16 @@
 
 A high-performance C++ Video-to-Audio Converter and static web server built using the [Drogon](https://github.com/drogonframework/drogon) framework. This project allows users to upload video files and convert them to various audio formats (MP3, AAC, OGG, etc.) with custom quality settings. It also features a "Download All" (ZIP) capability for batch conversions.
 
+---
+**Drag Video File**
 ![Book Cover](screenshots/1.jpg)
 
+---
+**Converting Audio**
 ![Book Cover](screenshots/2.jpg)
 
+---
+**Completed**
 ![Book Cover](screenshots/3.jpg)
 
 ## Project Structure
